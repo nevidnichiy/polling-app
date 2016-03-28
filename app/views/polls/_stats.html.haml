@@ -1,0 +1,15 @@
+#polls_per_month
+  :javascript
+    var selector = "#polls_per_month";
+    var data = #{@poll.serialize_for_graph};
+    Graph.instances.push(new Graph(selector, data, "column"));
+    
+-content_for :footer do
+  :javascript
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(function() {
+      Graph.instances.forEach(function(instance) {
+        instance.render();
+      });
+    });
+  
