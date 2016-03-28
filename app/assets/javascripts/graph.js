@@ -5,13 +5,17 @@ var Graph = function(selector, data, kind) {
 };
 
 Graph.prototype.getData = function () {
-  // Create the data table.
-  var data = new google.visualization.arrayToDataTable([]);
+
+  var _this = this;
 
   var dataWithCaptions = this.data.data.map(function(element, index, array) {
     return [ _this.data.x_axis.series[index], element ];
   });
 
+  return google.visualization.arrayToDataTable([
+    [ this.data.x_axis.legend, this.data.y_axis.legend ],
+    ].concat(dataWithCaptions));
+  
   return data;
 }
 
