@@ -19,6 +19,14 @@ Graph.prototype.getData = function () {
   return data;
 }
 
+Graph.prototype.getKind = function() {
+  var kinds = {
+    "column" : "ColumnChart",
+    "pie" : "PieChart"
+  };
+  return kinds[this.kind];
+}
+
 Graph.prototype.render = function() {
 
   // Set chart options
@@ -27,7 +35,7 @@ Graph.prototype.render = function() {
                  'height':300};
 
   // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.ColumnChart($(this.selector)[0]);
+  var chart = new google.visualization[this.getKind()]($(this.selector)[0]);
   chart.draw(this.getData(), options);
 };
 
